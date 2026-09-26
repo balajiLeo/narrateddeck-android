@@ -40,7 +40,7 @@ Desktop sibling: [balajiLeo/narrateddeck-studio](https://github.com/balajiLeo/na
 narrateddeck-android/
 ├── app/
 │   ├── build.gradle.kts
-│   └── src/main/java/com/narrateddeck.android/
+│   └── src/main/java/com/narrateddeck/android/
 │       ├── MainActivity.kt
 │       ├── domain/          # SlideNote, PptxParser, TtsNarrator, AudioExporter
 │       ├── viewmodel/       # DeckViewModel
