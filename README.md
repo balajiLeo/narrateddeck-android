@@ -10,7 +10,7 @@ Desktop sibling: [balajiLeo/narrateddeck-studio](https://github.com/balajiLeo/na
 
 1. Install [Android Studio](https://developer.android.com/studio) (Hedgehog / Iguana / Koala or newer recommended) with SDK 34.
 2. **File → Open** and select this folder (`narrateddeck-android`).
-3. Sync Gradle. Wrapper properties + `gradle-wrapper.jar` + `gradlew` scripts are included (Gradle 8.7). If the JAR is stripped by git LFS/filters, regenerate with Android Studio or `gradle wrapper --gradle-version 8.7`.
+3. Sync Gradle. `gradlew` / `gradlew.bat` + `gradle-wrapper.properties` are included (Gradle 8.7). The `gradle-wrapper.jar` is **not** in the repo — Android Studio will generate it on first sync, or run `gradle wrapper --gradle-version 8.7`.
 4. Wait for dependency download (Compose BOM, Material 3, Navigation, etc.).
 5. Run on an emulator (API 26+) or a physical device.
 
@@ -40,12 +40,12 @@ Desktop sibling: [balajiLeo/narrateddeck-studio](https://github.com/balajiLeo/na
 narrateddeck-android/
 ├── app/
 │   ├── build.gradle.kts
-│   └── src/main/java/com/narrateddeck/android/
+│   └── src/main/java/com/narrateddeck.android/
 │       ├── MainActivity.kt
 │       ├── domain/          # SlideNote, PptxParser, TtsNarrator, AudioExporter
 │       ├── viewmodel/       # DeckViewModel
 │       └── ui/              # theme, screens, navigation
-├── app/src/test/            # PptxParser + AudioExporter tests + sample_deck.pptx
+├── app/src/test/            # PptxParser + AudioExporter tests (optional sample_deck.pptx)
 ├── settings.gradle.kts
 ├── build.gradle.kts
 ├── gradle.properties
@@ -68,7 +68,14 @@ narrateddeck-android/
 - No slide thumbnail rendering / WYSIWYG deck preview.
 - Notes matching is by `slideN` / `notesSlideN` numbers (standard packaging); exotic rearrangements may need richer relationship parsing.
 - Export zip lives in cache; use Device File Explorer or add `ACTION_SEND` / SAF create-document in a follow-up.
-- A `gradle-wrapper.jar` is included for convenience; if sync still fails, regenerate with Android Studio or `gradle wrapper --gradle-version 8.7`.
+- `gradle-wrapper.jar` is not committed (see Binary files note); regenerate with Android Studio or `gradle wrapper --gradle-version 8.7`.
+
+## Binary files note
+
+This repository was published via the GitHub Contents API (text payloads). Binary blobs could not be uploaded as true binaries:
+
+- **`gradle/wrapper/gradle-wrapper.jar`** — not committed. Open the project in Android Studio (Sync will offer to generate the wrapper) or run `gradle wrapper --gradle-version 8.7` locally. `gradlew` / `gradlew.bat` and `gradle-wrapper.properties` are present.
+- **`app/src/test/resources/sample_deck.pptx`** — not committed as a binary. Unit tests include an in-memory PPTX builder (`PptxParserTest.parse_generatedInMemory_*`); the optional fixture-based test will skip/fail until you drop a real `sample_deck.pptx` into that folder (copy from a local scaffold if you have one).
 
 ## License
 
